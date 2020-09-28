@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "auto_park_sell_order")
+@Table(name = "auto_park_sell_orders")
 public class SellOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

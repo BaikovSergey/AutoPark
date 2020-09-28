@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/BaikovSergey/AutoPark.svg?branch=master)](https://travis-ci.org/BaikovSergey/AutoPark)
+[![codecov](https://codecov.io/gh/BaikovSergey/AutoPark/branch/master/graph/badge.svg)](https://codecov.io/gh/BaikovSergey/AutoPark)
+
 # AutoPark
 Web platform for buying and selling vehicles. 
 

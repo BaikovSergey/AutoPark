@@ -70,6 +70,14 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateSellOrder</servlet-name>
-        <url-pattern>update.du</url-pattern>
+        <url-pattern>/update.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>GetAllSellOrder</servlet-name>
+        <servlet-class>ru.job4j.presentation.GetAllSellOrders</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetAllSellOrder</servlet-name>
+        <url-pattern>/getAll.do</url-pattern>
     </servlet-mapping>
 </web-app>

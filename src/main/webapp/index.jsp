@@ -95,7 +95,10 @@
                 value="${user.name}"/> | Sign in</a>
 </div>
 <div class="container">
-    <a href="http://localhost:8080/add.do" class="btn btn-success btn-lg">Add sell order</a>
+    <a href="<%=request.getContextPath()%>/create.do?userId=${userId}"
+       class="btn btn-success btn-lg">Add
+        sell
+        order</a>
 </div>
 <div class="container pt-5">
     <div>

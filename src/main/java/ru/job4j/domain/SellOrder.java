@@ -28,7 +28,7 @@ public class SellOrder {
     @Column(name = "engineVolume")
     private double engineVolume;
     @Column(name = "price")
-    private Long price;
+    private Integer price;
     @ManyToOne
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
     private User user;
@@ -39,7 +39,7 @@ public class SellOrder {
 
     public SellOrder(String condition, String brand, String model, String body,
                      String transmission, String engine, String drive, Integer mileage,
-                     double engineVolume, Long price, User user) {
+                     double engineVolume, Integer price, User user) {
         this.condition = condition;
         this.brand = brand;
         this.model = model;
@@ -55,7 +55,7 @@ public class SellOrder {
 
     public SellOrder(String condition, String brand, String model, String body,
                      String transmission, String engine, String drive, Integer mileage,
-                     double engineVolume, Long price) {
+                     double engineVolume, Integer price) {
         this.condition = condition;
         this.brand = brand;
         this.model = model;
@@ -148,11 +148,11 @@ public class SellOrder {
         this.engineVolume = engineVolume;
     }
 
-    public Long getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

@@ -42,11 +42,11 @@
   </servlet-mapping>
     <servlet>
         <servlet-name>AddSellOrder</servlet-name>
-        <servlet-class>ru.job4j.presentation.AddSellOrder</servlet-class>
+        <servlet-class>ru.job4j.presentation.CreateSellOrder</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddSellOrder</servlet-name>
-        <url-pattern>/add.do</url-pattern>
+        <url-pattern>/create.do</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>ChangeSellOrder</servlet-name>
@@ -79,5 +79,13 @@
     <servlet-mapping>
         <servlet-name>GetAllSellOrder</servlet-name>
         <url-pattern>/getAll.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PostNewSellOrder</servlet-name>
+        <servlet-class>ru.job4j.presentation.PostNewSellOrder</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostNewSellOrder</servlet-name>
+        <url-pattern>/post.do</url-pattern>
     </servlet-mapping>
 </web-app>

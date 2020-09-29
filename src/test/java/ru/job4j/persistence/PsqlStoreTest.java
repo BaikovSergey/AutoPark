@@ -183,7 +183,7 @@ public class PsqlStoreTest {
                 "Diesel",
                 1,
                 3.0d,
-                65000L
+                65000
         );
     }
 }

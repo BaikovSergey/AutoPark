@@ -24,31 +24,22 @@
 
         function displayAllSellOrders() {
             $("#allSellOrders tbody tr").empty();
-            $.getJSON('http://localhost:8080/index.do/getAll.do', function (data) {
+            $.getJSON('<%=request.getContextPath()%>/getAllOrders.do', function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    $('#allTasks > tbody:last-child').append('<tr class="sellOrder">'
-                        + '<td class="id" style="display: none">' + data[i].id + '</td>'
-                        + '<td class="userName">' + data[i].user.name + '</td>'
-                        + '<td class="description">' + data[i].description + '</td>'
-                        + '<td class="created">' + data[i].created + '</td>'
-                        + '<td class="status">' + data[i].status + '</td>'
-                        + '<td><div class="btn-group btn-group-sm"><button type="button" '
-                        + 'class="btn btn-success">Complete</button><button type="button" '
-                        + 'class="btn btn-primary">Change</button><button type="button" '
-                        + 'class="btn btn-danger">Delete</button></div></td></tr>');
+                    $('#allSellOrders > tbody:last-child').append('<tr><td style="display: none">' + 'Id' +'</td><td><img src="" class="rounded" alt=""></td><td></td><td><div class="row"><div class="col-sm-5">' + data[i].brand + " " + data[i].model + '</div><div class="col-sm-3">' + data[i].price + '</div><div class="col-sm-2">' + data[i].condition + '</div><div class="col-sm-2">' + data[i].mileage + '</div></div><div class="row"><div class="col-sm-1">' + data[i].engineVolume + '</div><div class="col-sm-2">' + data[i].engine + '</div><div class="col-sm-1">' + data[i].drive + '</div><div class="col-sm-8"></div></div><div class="row"><div class="col-sm-2">' + data[i].transmission + '</div><div class="col-sm-10"></div></div><div class="row"><div class="col-sm-2">' + data[i].body + '</div><div class="col-sm-10"></div></div></td></tr>');
                 }
             });
         }
 
-        // $(document).ready(function () {
-        //     displayAllSellOrders();
-        // });
+        $(document).ready(function () {
+            displayAllSellOrders();
+        });
 
         $(document).ready(function () {
             $("#allSellOrders").on("click", ".btn-danger", function () {
                 var $row = $(this).closest("tr");
                 var $id = $row.find(".id").text();
-                $.post("http://localhost:8080/index.do/delete.do",
+                $.post("<%=request.getContextPath()%>/delete.do",
                     "id=" + $id,
                     function () {
                    displayAllSellOrders();
@@ -60,7 +51,7 @@
             $("#allSellOrders").on("click", ".btn-success", function () {
                 var $row = $(this).closest("tr");
                 var $id = $row.find(".id").text();
-                $.post("http://localhost:8080/index.do/change.do",
+                $.post("<%=request.getContextPath()%>/change.do",
                     "id=" + $id,
                     function () {
                         displayAllSellOrders();
@@ -72,7 +63,7 @@
             $("#allSellOrders").on("click", ".btn-primary", function () {
                 var $row = $(this).closest("tr");
                 var $id = $row.find(".id").text();
-                window.location.replace("http://localhost:8080/index.do/update.jsp?id=" +
+                window.location.replace("<%=request.getContextPath()%>/update.jsp?id=" +
                     $id);
             });
         });
@@ -114,44 +105,12 @@
         <tr>
             <th style="display: none" >Id</th>
             <th style="width: 25%">Photo</th>
-            <th style="width: 5%">Gap</th>
-            <th style="width: 70%">Description</th>
+            <th style="width: 3%"></th>
+            <th style="width: 72%">Description</th>
         </tr>
         </thead>
-        <tbody id="allSellOrderBody">
-            <tr>
-                <td style="display: none">id</td>
-                <td>Photo</td>
-                <td>Gap</td>
-                <td>Desc</td>
-            </tr>
-            <tr>
-                <td style="display: none">Id</td>
-                <td><img src="" class="rounded" alt=""></td>
-                <td></td>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-5">Название</div>
-                        <div class="col-sm-3">Сумма</div>
-                        <div class="col-sm-2">Год</div>
-                        <div class="col-sm-2">Пробег</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-1">Объем д.</div>
-                        <div class="col-sm-2">Тип двиг.</div>
-                        <div class="col-sm-1">Привод</div>
-                        <div class="col-sm-8"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2">Трансмисия</div>
-                        <div class="col-sm-10"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-2">Кузов</div>
-                        <div class="col-sm-10"></div>
-                    </div>
-                </td>
-            </tr>
+        <tbody>
+
         </tbody>
     </table>
 </div>

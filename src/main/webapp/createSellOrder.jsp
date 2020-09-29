@@ -67,8 +67,20 @@
                                    name="model" id="model" required>
                         </div>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Body"
-                                   name="body" id="body" required>
+                            <select class="form-control" name="body" id="body" required>
+                                <option value="" disabled selected hidden>Body</option>
+                                <option>Sedan</option>
+                                <option>Hatchback</option>
+                                <option>Cabriolet</option>
+                                <option>Crossover</option>
+                                <option>Coupe</option>
+                                <option>Station wagon</option>
+                                <option>Minivan</option>
+                                <option>Pickup</option>
+                                <option>Limousine</option>
+                                <option>Pickup</option>
+                                <option>Van</option>
+                            </select>
                         </div>
                         <div class="col-sm-2">
                             <input type="text" class="form-control"
@@ -79,20 +91,62 @@
                     <br>
                     <div class="row">
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" placeholder="Engine volume"
-                                   name="engineVolume" id="engineVolume" required>
+                            <select class="form-control" name="engineVolume" id="engineVolume" required>
+                                <option value="" disabled selected hidden>Volume l</option>
+                                <option>0.2</option>
+                                <option>0.4</option>
+                                <option>0.6</option>
+                                <option>0.8</option>
+                                <option>1.0</option>
+                                <option>1.2</option>
+                                <option>1.3</option>
+                                <option>1.4</option>
+                                <option>1.6</option>
+                                <option>1.8</option>
+                                <option>2.0</option>
+                                <option>2.2</option>
+                                <option>2.4</option>
+                                <option>2.6</option>
+                                <option>2.8</option>
+                                <option>3.0</option>
+                                <option>3.5</option>
+                                <option>4.0</option>
+                                <option>4.5</option>
+                                <option>5.0</option>
+                                <option>5.5</option>
+                                <option>6.0</option>
+                                <option>7.0</option>
+                                <option>8.0</option>
+                                <option>9.0</option>
+                                <option>10.0</option>
+                            </select>
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" placeholder="Engine type"
-                                   name="engine" id="engine" required>
+                            <select class="form-control" name="engine" id="engine" required>
+                                <option value="" disabled selected hidden>Engine</option>
+                                <option>Gasoline</option>
+                                <option>Diesel</option>
+                                <option>Hybrid</option>
+                                <option>Electric</option>
+                                <option>Turbo</option>
+                                <option>Atmospheric</option>
+                            </select>
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" placeholder="Drive"
-                                   name="drive" id="drive" required>
+                            <select class="form-control" name="drive" id="drive" required>
+                                <option value="" disabled selected hidden>Drive</option>
+                                <option>FWD</option>
+                                <option>RWD</option>
+                                <option>4WD</option>
+                                <option>AWD</option>
+                            </select>
                         </div>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" placeholder="Transmission"
-                                   name="transmission" id="transmission" required>
+                            <select class="form-control"  name="transmission" id="transmission" required>
+                                <option value="" disabled selected hidden>Transmission</option>
+                                <option>Manual</option>
+                                <option>Automatic</option>
+                            </select>
                         </div>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" placeholder="Mileage"

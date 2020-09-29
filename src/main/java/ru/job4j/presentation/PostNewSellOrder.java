@@ -26,7 +26,7 @@ public class PostNewSellOrder extends HttpServlet {
         result.setModel(req.getParameter("model"));
         result.setBody(req.getParameter("body"));
         result.setCondition(req.getParameter("condition"));
-        result.setEngineVolume(Integer.parseInt(req.getParameter("engineVolume")));
+        result.setEngineVolume(Double.parseDouble(req.getParameter("engineVolume")));
         result.setEngine(req.getParameter("engine"));
         result.setDrive(req.getParameter("drive"));
         result.setTransmission(req.getParameter("transmission"));

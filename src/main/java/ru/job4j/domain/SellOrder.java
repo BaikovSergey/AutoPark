@@ -29,6 +29,8 @@ public class SellOrder {
     private double engineVolume;
     @Column(name = "price")
     private Integer price;
+    @Column(name = "status")
+    private boolean status;
     @ManyToOne
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
     private User user;
@@ -39,7 +41,7 @@ public class SellOrder {
 
     public SellOrder(String condition, String brand, String model, String body,
                      String transmission, String engine, String drive, Integer mileage,
-                     double engineVolume, Integer price, User user) {
+                     double engineVolume, Integer price, boolean status, User user) {
         this.condition = condition;
         this.brand = brand;
         this.model = model;
@@ -50,12 +52,13 @@ public class SellOrder {
         this.mileage = mileage;
         this.engineVolume = engineVolume;
         this.price = price;
+        this.status = status;
         this.user = user;
     }
 
     public SellOrder(String condition, String brand, String model, String body,
                      String transmission, String engine, String drive, Integer mileage,
-                     double engineVolume, Integer price) {
+                     double engineVolume, Integer price, boolean status) {
         this.condition = condition;
         this.brand = brand;
         this.model = model;
@@ -66,6 +69,7 @@ public class SellOrder {
         this.mileage = mileage;
         this.engineVolume = engineVolume;
         this.price = price;
+        this.status = status;
     }
 
     public int getId() {
@@ -164,6 +168,18 @@ public class SellOrder {
         this.user = user;
     }
 
+    public void setEngineVolume(double engineVolume) {
+        this.engineVolume = engineVolume;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -184,13 +200,14 @@ public class SellOrder {
                 && Objects.equals(mileage, sellOrder.mileage)
                 && Objects.equals(engineVolume, sellOrder.engineVolume)
                 && Objects.equals(price, sellOrder.price)
+                && Objects.equals(status, sellOrder.status)
                 && Objects.equals(user, sellOrder.user);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, condition, brand, model, body, transmission, engine, drive,
-                mileage, engineVolume, price, user);
+                mileage, engineVolume, price, status, user);
     }
 
 }

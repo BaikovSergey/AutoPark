@@ -8,7 +8,8 @@ create table auto_park_sell_orders (
   engine varchar(50),
   drive varchar(50),
   mileage integer,
-  engineVolume float,
+  engineVolume double precision,
   price integer,
+  status boolean default false ,
   user_id int not null references auto_park_users(id)
 );

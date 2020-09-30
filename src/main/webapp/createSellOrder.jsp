@@ -93,6 +93,7 @@
                         <div class="col-sm-1">
                             <select class="form-control" name="engineVolume" id="engineVolume" required>
                                 <option value="" disabled selected hidden>Volume l</option>
+                                <option>0</option>
                                 <option>0.2</option>
                                 <option>0.4</option>
                                 <option>0.6</option>
@@ -161,9 +162,7 @@
                         </div>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-success"
-                            onclick="return validate();">Post sell order
-                    </button>
+                    <button type="submit" class="btn btn-success">Post sell order</button>
                 </form>
             </div>
         </div>

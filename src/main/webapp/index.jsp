@@ -23,10 +23,32 @@
     <script>
 
         function displayAllSellOrders() {
-            $("#allSellOrders tbody tr").empty();
+            $("#allSellOrders tbody").empty();
             $.getJSON('<%=request.getContextPath()%>/getAllOrders.do', function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    $('#allSellOrders > tbody:last-child').append('<tr><td style="display: none">' + 'Id' +'</td><td><img src="" class="rounded" alt=""></td><td></td><td><div class="row"><div class="col-sm-5">' + data[i].brand + " " + data[i].model + '</div><div class="col-sm-3">' + data[i].price + '</div><div class="col-sm-2">' + data[i].condition + '</div><div class="col-sm-2">' + data[i].mileage + '</div></div><div class="row"><div class="col-sm-1">' + data[i].engineVolume + '</div><div class="col-sm-2">' + data[i].engine + '</div><div class="col-sm-1">' + data[i].drive + '</div><div class="col-sm-8"></div></div><div class="row"><div class="col-sm-2">' + data[i].transmission + '</div><div class="col-sm-10"></div></div><div class="row"><div class="col-sm-2">' + data[i].body + '</div><div class="col-sm-10"></div></div></td></tr>');
+                    $('#allSellOrders > tbody:last-child').append('<tr>'
+                        + '<td style="display: none">' + data[i].id +'</td>'
+                        + '<td style="display: none">' + data[i].status +'</td>'
+                        + '<td><img src="" class="rounded" alt=""></td>'
+                        + '<td></td><td><div class="row">'
+                        + '<div class="col-sm-5">' + data[i].brand + " " + data[i].model + '</div>'
+                        + '<div class="col-sm-3">' + data[i].price + " ₽" + '</div>'
+                        + '<div class="col-sm-2">' + data[i].condition + " year" + '</div>'
+                        + '<div class="col-sm-2">' + data[i].mileage + " km" + '</div>'
+                        + '</div><div class="row">'
+                        + '<div class="col-sm-1">' + data[i].engineVolume + '</div>'
+                        + '<div class="col-sm-2">' + data[i].engine + '</div>'
+                        + '<div class="col-sm-1">' + data[i].drive + '</div>'
+                        + '<div class="col-sm-8"></div></div>'
+                        + '<div class="row">'
+                        + '<div class="col-sm-2">' + data[i].transmission + '</div>'
+                        + '<div class="col-sm-10"></div></div>'
+                        + '<div class="row">'
+                        + '<div class="col-sm-2">' + data[i].body + '</div>'
+                        + '<div class="col-sm-5"></div>'
+                        + '<div class="col-sm-3"><button type="button" class="btn btn-outline-primary btn-sm" id="btn-change">Change status</button></div>'
+                        + '<div class="col-sm-2">'
+                        + '<h4><span class="badge badge-success">On sale</span></h3></div></div></td></tr>');
                 }
             });
         }
@@ -40,7 +62,7 @@
                 var $row = $(this).closest("tr");
                 var $id = $row.find(".id").text();
                 $.post("<%=request.getContextPath()%>/delete.do",
-                    "id=" + $id,
+                    "orderId=" + $id,
                     function () {
                    displayAllSellOrders();
                 });
@@ -48,11 +70,15 @@
         });
 
         $(document).ready(function () {
-            $("#allSellOrders").on("click", ".btn-success", function () {
+
+        });
+
+        $(document).ready(function () {
+            $("#allSellOrders").on("click", "#btn-change", function () {
                 var $row = $(this).closest("tr");
-                var $id = $row.find(".id").text();
+                var $id = $row.find("td:nth-child(1)").text();
                 $.post("<%=request.getContextPath()%>/change.do",
-                    "id=" + $id,
+                    "orderId=" + $id,
                     function () {
                         displayAllSellOrders();
                     });
@@ -63,14 +89,14 @@
             $("#allSellOrders").on("click", ".btn-primary", function () {
                 var $row = $(this).closest("tr");
                 var $id = $row.find(".id").text();
-                window.location.replace("<%=request.getContextPath()%>/update.jsp?id=" +
+                window.location.replace("<%=request.getContextPath()%>/update.do?id=" +
                     $id);
             });
         });
 
         $(document).ready(function () {
-            $("#toggleList").click(function () {
-                $('#allSellOrders tbody > tr .status').filter(function () {
+            $(document).on("click", "#toggleList", function () {
+                $('#allSellOrders tbody > tr > td:contains(true)').filter(function () {
                     return $(this).text() === "true";
                 }).each(function () {
                     $(this).closest("tr").toggle();
@@ -87,9 +113,7 @@
 </div>
 <div class="container">
     <a href="<%=request.getContextPath()%>/create.do?userId=${userId}"
-       class="btn btn-success btn-lg">Add
-        sell
-        order</a>
+       class="btn btn-success btn-lg">Add sell order</a>
 </div>
 <div class="container pt-5">
     <div>
@@ -103,7 +127,7 @@
     <table class="table" id="allSellOrders" style="table-layout: fixed">
         <thead class="thead-light">
         <tr>
-            <th style="display: none" >Id</th>
+            <th class="orderId" style="display: none" id="orderId">Id</th>
             <th style="width: 25%">Photo</th>
             <th style="width: 3%"></th>
             <th style="width: 72%">Description</th>

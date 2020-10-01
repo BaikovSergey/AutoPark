@@ -26,6 +26,12 @@
             $("#allSellOrders tbody").empty();
             $.getJSON('<%=request.getContextPath()%>/getAllOrders.do', function (data) {
                 for (var i = 0; i < data.length; i++) {
+
+                    var badge = getBadge(data[i].status);
+                    var currentUserId = "${user.id}";
+                    var sellOrderUserId = data[i].user.id.toString();
+                    var btnChangeStatus = btnStatus(currentUserId, sellOrderUserId);
+
                     $('#allSellOrders > tbody:last-child').append('<tr>'
                         + '<td style="display: none">' + data[i].id +'</td>'
                         + '<td style="display: none">' + data[i].status +'</td>'
@@ -47,11 +53,41 @@
                         + '<div class="row">'
                         + '<div class="col-sm-2">' + data[i].body + '</div>'
                         + '<div class="col-sm-5"></div>'
-                        + '<div class="col-sm-3"><button type="button" class="btn btn-outline-primary btn-sm" id="btn-change">Change status</button></div>'
+                        + '<div class="col-sm-3">' + btnChangeStatus + '</button></div>'
                         + '<div class="col-sm-2">'
-                        + '<h4><span class="badge badge-success">On sale</span></h3></div></div></td></tr>');
+                        + '<h4 id="tag">'+ badge +'</h4></div></div></td></tr>');
                 }
             });
+        }
+
+        function getBadge(status) {
+            var result = "";
+            if (status === false) {
+                result = "<span class=\"badge badge-success\">On sale</span>";
+            } else {
+                result = "<span class=\"badge badge-danger\">Soled</span>";
+            }
+            return result;
+        }
+
+        function btnStatus(currentUserId, sellOrderUserId) {
+            var result = "";
+            if (currentUserId === sellOrderUserId) {
+                result = "<button type=\"button\" "
+                    + "class=\"btn btn-outline-primary btn-sm\" "
+                    + "id=\"btn-change\">Change status</button>";
+            }
+            return result;
+        }
+
+        function btnUpdate(currentUserId, sellOrderUserId) {
+            var result = "";
+            if (currentUserId === sellOrderUserId) {
+                result = "<button type=\"button\" "
+                    + "class=\"btn btn-outline-dark btn-sm\" "
+                    + "id=\"btn-change\">Change order</button>";
+            }
+            return result;
         }
 
         $(document).ready(function () {
@@ -59,29 +95,14 @@
         });
 
         $(document).ready(function () {
-            $("#allSellOrders").on("click", ".btn-danger", function () {
-                var $row = $(this).closest("tr");
-                var $id = $row.find(".id").text();
-                $.post("<%=request.getContextPath()%>/delete.do",
-                    "orderId=" + $id,
-                    function () {
-                   displayAllSellOrders();
-                });
-            });
-        });
-
-        $(document).ready(function () {
             $("#allSellOrders").on("click", "#btn-change", function () {
                 var $row = $(this).closest("tr");
                 var $id = $row.find("td:nth-child(1)").text();
-                var currentUserId = "${user.id}";
-                if (currentUserId === $id) {
                     $.post("<%=request.getContextPath()%>/change.do",
                         "orderId=" + $id,
                         function () {
                             displayAllSellOrders();
                         });
-                }
             });
         });
 

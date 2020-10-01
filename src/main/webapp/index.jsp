@@ -29,6 +29,7 @@
                     $('#allSellOrders > tbody:last-child').append('<tr>'
                         + '<td style="display: none">' + data[i].id +'</td>'
                         + '<td style="display: none">' + data[i].status +'</td>'
+                        + '<td style="display: none" id="userId">' + data[i].user.id + '</td>'
                         + '<td><img src="" class="rounded" alt=""></td>'
                         + '<td></td><td><div class="row">'
                         + '<div class="col-sm-5">' + data[i].brand + " " + data[i].model + '</div>'
@@ -70,20 +71,20 @@
         });
 
         $(document).ready(function () {
-
-        });
-
-        $(document).ready(function () {
             $("#allSellOrders").on("click", "#btn-change", function () {
                 var $row = $(this).closest("tr");
                 var $id = $row.find("td:nth-child(1)").text();
-                $.post("<%=request.getContextPath()%>/change.do",
-                    "orderId=" + $id,
-                    function () {
-                        displayAllSellOrders();
-                    });
+                var currentUserId = "${user.id}";
+                if (currentUserId === $id) {
+                    $.post("<%=request.getContextPath()%>/change.do",
+                        "orderId=" + $id,
+                        function () {
+                            displayAllSellOrders();
+                        });
+                }
             });
         });
+
 
         $(document).ready(function () {
             $("#allSellOrders").on("click", ".btn-primary", function () {

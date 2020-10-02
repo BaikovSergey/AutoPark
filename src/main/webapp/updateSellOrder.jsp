@@ -18,14 +18,33 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-    <title>Create Sell Order</title>
+    <title>Update Sell Order</title>
 
     <script>
+        // $(document).ready(function () {
+        //     var url = new URL(window.location);
+        //     var id = url.searchParams.get("userId");
+        //     $("#userId").attr("value", id);
+        // });
+
         $(document).ready(function () {
             var url = new URL(window.location);
-            var id = url.searchParams.get("userId");
-            $("#userId").attr("value", id);
-        })
+            var id = url.searchParams.get("orderId");
+            $.getJSON('<%=request.getContextPath()%>/getOrder.do?orderId=' + id, function (data) {
+                $("#orderId").prop("value", id);
+                $("#brand").prop("value", data.brand);
+                $("#model").prop("value", data.model);
+                $("#body").prop("value", data.body);
+                $("#condition").prop("value", data.condition);
+                $("#engineVolume").prop("value", data.engineVolume);
+                $("#engine").prop("value", data.engine);
+                $("#drive").prop("value", data.drive);
+                $("#transmission").prop("value", data.transmission);
+                $("#mileage").prop("value", data.mileage);
+                $("#price").prop("value", data.price);
+            });
+        });
+
     </script>
 </head>
 <body>
@@ -33,13 +52,13 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Create new sell order
+                Update sell order
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/post.do" method="post"
+                <form action="<%=request.getContextPath()%>/update.do"  method="post"
                       class="was-validate">
                     <div class="row">
-                        <input type="hidden" class="form-control" name="userId" id="userId">
+                        <input type="hidden" class="form-control" name="orderId" id="orderId">
                         <div class="col-sm-3">
                             <input type="text" class="form-control" placeholder="Brand"
                                    name="brand" id="brand" required>

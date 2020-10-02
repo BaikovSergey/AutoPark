@@ -30,11 +30,12 @@
                     var badge = getBadge(data[i].status);
                     var currentUserId = "${user.id}";
                     var sellOrderUserId = data[i].user.id.toString();
-                    var btnChangeStatus = btnStatus(currentUserId, sellOrderUserId);
+                    var btnChangeOrder = getBtnChangeOrder(currentUserId, sellOrderUserId)
+                    var btnChangeStatus = getBtnStatus(currentUserId, sellOrderUserId);
 
                     $('#allSellOrders > tbody:last-child').append('<tr>'
-                        + '<td style="display: none">' + data[i].id +'</td>'
-                        + '<td style="display: none">' + data[i].status +'</td>'
+                        + '<td style="display: none" id="orderId">' + data[i].id +'</td>'
+                        + '<td style="display: none" id="status">' + data[i].status +'</td>'
                         + '<td style="display: none" id="userId">' + data[i].user.id + '</td>'
                         + '<td><img src="" class="rounded" alt=""></td>'
                         + '<td></td><td><div class="row">'
@@ -52,8 +53,8 @@
                         + '<div class="col-sm-10"></div></div>'
                         + '<div class="row">'
                         + '<div class="col-sm-2">' + data[i].body + '</div>'
-                        + '<div class="col-sm-5"></div>'
-                        + '<div class="col-sm-3">' + btnChangeStatus + '</button></div>'
+                        + '<div class="col-sm-4"></div>'
+                        + '<div class="col-sm-4">' + btnChangeOrder + btnChangeStatus + '</div>'
                         + '<div class="col-sm-2">'
                         + '<h4 id="tag">'+ badge +'</h4></div></div></td></tr>');
                 }
@@ -70,7 +71,7 @@
             return result;
         }
 
-        function btnStatus(currentUserId, sellOrderUserId) {
+        function getBtnStatus(currentUserId, sellOrderUserId) {
             var result = "";
             if (currentUserId === sellOrderUserId) {
                 result = "<button type=\"button\" "
@@ -80,12 +81,12 @@
             return result;
         }
 
-        function btnUpdate(currentUserId, sellOrderUserId) {
+        function getBtnChangeOrder(currentUserId, sellOrderUserId) {
             var result = "";
             if (currentUserId === sellOrderUserId) {
                 result = "<button type=\"button\" "
                     + "class=\"btn btn-outline-dark btn-sm\" "
-                    + "id=\"btn-change\">Change order</button>";
+                    + "id=\"btn-update\">Update order</button>";
             }
             return result;
         }
@@ -108,11 +109,10 @@
 
 
         $(document).ready(function () {
-            $("#allSellOrders").on("click", ".btn-primary", function () {
+            $("#allSellOrders").on("click", "#btn-update", function () {
                 var $row = $(this).closest("tr");
-                var $id = $row.find(".id").text();
-                window.location.replace("<%=request.getContextPath()%>/update.do?id=" +
-                    $id);
+                var $id = $row.find("td:nth-child(1)").text();
+                window.location.replace("<%=request.getContextPath()%>/updateSellOrder.jsp?orderId=" + $id);
             });
         });
 

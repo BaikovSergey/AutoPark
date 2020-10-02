@@ -88,4 +88,12 @@
         <servlet-name>PostNewSellOrder</servlet-name>
         <url-pattern>/post.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>GetSellOrderById</servlet-name>
+        <servlet-class>ru.job4j.presentation.GetSellOrderById</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetSellOrderById</servlet-name>
+        <url-pattern>/getOrder.do</url-pattern>
+    </servlet-mapping>
 </web-app>

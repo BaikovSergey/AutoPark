@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import ru.job4j.domain.CarPhoto;
 import ru.job4j.domain.SellOrder;
 import ru.job4j.domain.User;
 import ru.job4j.persistence.PsqlStore;
@@ -36,6 +37,11 @@ public class AutoPark implements SellPlatform {
     }
 
     @Override
+    public CarPhoto createCarPhoto(CarPhoto photo) {
+        return PsqlStore.instOf().createCarPhoto(photo, sf);
+    }
+
+    @Override
     public void updateSellOrder(SellOrder sellOrder) {
         PsqlStore.instOf().updateSellOrder(sellOrder, sf);
     }
@@ -43,6 +49,11 @@ public class AutoPark implements SellPlatform {
     @Override
     public void updateUser(User user) {
         PsqlStore.instOf().updateUser(user, sf);
+    }
+
+    @Override
+    public void updateCarPhoto(CarPhoto photo) {
+        PsqlStore.instOf().updateCarPhoto(photo, sf);
     }
 
     @Override
@@ -56,6 +67,11 @@ public class AutoPark implements SellPlatform {
     }
 
     @Override
+    public void deleteCarPhoto(Integer id) {
+        PsqlStore.instOf().deleteCarPhoto(id, sf);
+    }
+
+    @Override
     public Collection<SellOrder> findAllSellOrders() {
         return PsqlStore.instOf().findAllSellOrders(sf);
     }
@@ -66,6 +82,11 @@ public class AutoPark implements SellPlatform {
     }
 
     @Override
+    public Collection<CarPhoto> findAllCarPhotos() {
+        return PsqlStore.instOf().findAllCarPhotos(sf);
+    }
+
+    @Override
     public SellOrder findSellOrderById(Integer id) {
         return PsqlStore.instOf().findSellOrderById(id, sf);
     }
@@ -73,6 +94,11 @@ public class AutoPark implements SellPlatform {
     @Override
     public User findUserById(Integer id) {
         return PsqlStore.instOf().findUserById(id, sf);
+    }
+
+    @Override
+    public CarPhoto findCarPhotoById(Integer id) {
+        return PsqlStore.instOf().findCarPhotoById(id, sf);
     }
 
     @Override

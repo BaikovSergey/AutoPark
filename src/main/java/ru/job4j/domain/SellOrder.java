@@ -31,6 +31,9 @@ public class SellOrder {
     private Integer price;
     @Column(name = "status")
     private boolean status;
+    @OneToOne
+    @JoinColumn(name = "car_photo_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
+    private CarPhoto carPhotos;
     @ManyToOne
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
     private User user;
@@ -201,13 +204,14 @@ public class SellOrder {
                 && Objects.equals(engineVolume, sellOrder.engineVolume)
                 && Objects.equals(price, sellOrder.price)
                 && Objects.equals(status, sellOrder.status)
+                && Objects.equals(carPhotos, sellOrder.carPhotos)
                 && Objects.equals(user, sellOrder.user);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, condition, brand, model, body, transmission, engine, drive,
-                mileage, engineVolume, price, status, user);
+                mileage, engineVolume, price, status, carPhotos, user);
     }
 
 }

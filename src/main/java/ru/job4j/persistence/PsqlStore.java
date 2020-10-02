@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import ru.job4j.domain.CarPhoto;
 import ru.job4j.domain.SellOrder;
 import ru.job4j.domain.User;
 
@@ -34,6 +35,12 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public CarPhoto createCarPhoto(CarPhoto photo, SessionFactory sf) {
+        this.transaction(session -> session.save(photo), sf);
+        return photo;
+    }
+
+    @Override
     public void updateSellOrder(SellOrder sellOrder, SessionFactory sf) {
         this.transactionVoid(session -> session.update(sellOrder), sf);
     }
@@ -41,6 +48,11 @@ public class PsqlStore implements Store {
     @Override
     public void updateUser(User user, SessionFactory sf) {
         this.transactionVoid(session -> session.update(user), sf);
+    }
+
+    @Override
+    public void updateCarPhoto(CarPhoto photo, SessionFactory sf) {
+        this.transactionVoid(session -> session.update(photo), sf);
     }
 
     @Override
@@ -58,6 +70,13 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public void deleteCarPhoto(Integer id, SessionFactory sf) {
+        CarPhoto photo = new CarPhoto();
+        photo.setId(id);
+        this.transactionVoid(session -> session.delete(photo), sf);
+    }
+
+    @Override
     public Collection<SellOrder> findAllSellOrders(SessionFactory sf) {
         return this.transaction(session -> session.createQuery(
                 "from ru.job4j.domain.SellOrder").list(), sf);
@@ -67,6 +86,12 @@ public class PsqlStore implements Store {
     public Collection<User> findAllUsers(SessionFactory sf) {
         return this.transaction(session -> session.createQuery(
                 "from ru.job4j.domain.User").list(), sf);
+    }
+
+    @Override
+    public Collection<CarPhoto> findAllCarPhotos(SessionFactory sf) {
+        return this.transaction(session -> session.createQuery(
+                "from ru.job4j.domain.CarPhoto").list(), sf);
     }
 
     @Override
@@ -86,6 +111,11 @@ public class PsqlStore implements Store {
                 User.class);
         query.setParameter("scn", email);
         return query.uniqueResult();
+    }
+
+    @Override
+    public CarPhoto findCarPhotoById(Integer id, SessionFactory sf) {
+        return this.transaction(session -> session.get(CarPhoto.class, id), sf);
     }
 
     private <T> T transaction(final Function<Session, T> command, SessionFactory sf) {

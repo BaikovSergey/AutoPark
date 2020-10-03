@@ -96,4 +96,20 @@
         <servlet-name>GetSellOrderById</servlet-name>
         <url-pattern>/getOrder.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UploadPhoto</servlet-name>
+        <servlet-class>ru.job4j.presentation.PhotoUpload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadPhoto</servlet-name>
+        <url-pattern>/upload.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UploadPage</servlet-name>
+        <servlet-class>ru.job4j.presentation.UploadPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadPage</servlet-name>
+        <url-pattern>/uploadPage.do</url-pattern>
+    </servlet-mapping>
 </web-app>

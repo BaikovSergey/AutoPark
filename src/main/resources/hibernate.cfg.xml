@@ -15,5 +15,6 @@
 
         <mapping class="ru.job4j.domain.SellOrder" />
         <mapping class="ru.job4j.domain.User" />
+        <mapping class="ru.job4j.domain.CarPhoto" />
     </session-factory>
 </hibernate-configuration>

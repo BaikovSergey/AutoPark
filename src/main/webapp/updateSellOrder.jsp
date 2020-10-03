@@ -21,11 +21,6 @@
     <title>Update Sell Order</title>
 
     <script>
-        // $(document).ready(function () {
-        //     var url = new URL(window.location);
-        //     var id = url.searchParams.get("userId");
-        //     $("#userId").attr("value", id);
-        // });
 
         $(document).ready(function () {
             var url = new URL(window.location);

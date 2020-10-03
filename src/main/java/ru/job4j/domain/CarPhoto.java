@@ -4,23 +4,21 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "car_photo")
+@Table(name = "auto_park_car_photos")
 public class CarPhoto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name")
     private String name;
-    @OneToOne
-    @JoinColumn(name = "sell_order_id", foreignKey = @ForeignKey(name =
-            "AUTO_PARK_SELL_ORDER_ID_FK"))
-    private SellOrder sellOrderId;
+    @Column(name = "sell_order_id")
+    private int sellOrderId;
 
     public CarPhoto() {
 
     }
 
-    public CarPhoto(String name, SellOrder sellOrderId) {
+    public CarPhoto(String name, int sellOrderId) {
         this.name = name;
         this.sellOrderId = sellOrderId;
     }
@@ -41,11 +39,11 @@ public class CarPhoto {
         this.name = name;
     }
 
-    public SellOrder getSellOrderId() {
+    public int getSellOrderId() {
         return sellOrderId;
     }
 
-    public void setSellOrderId(SellOrder sellOrderId) {
+    public void setSellOrderId(int sellOrderId) {
         this.sellOrderId = sellOrderId;
     }
 

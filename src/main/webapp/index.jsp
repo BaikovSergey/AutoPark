@@ -30,14 +30,16 @@
                     var badge = getBadge(data[i].status);
                     var currentUserId = "${user.id}";
                     var sellOrderUserId = data[i].user.id.toString();
+                    var carPhoto = data[i].carPhoto.toString();
                     var btnChangeOrder = getBtnChangeOrder(currentUserId, sellOrderUserId)
                     var btnChangeStatus = getBtnStatus(currentUserId, sellOrderUserId);
+                    var btnAddPhoto = getBtnAddPhoto(currentUserId, sellOrderUserId);
 
                     $('#allSellOrders > tbody:last-child').append('<tr>'
                         + '<td style="display: none" id="orderId">' + data[i].id +'</td>'
                         + '<td style="display: none" id="status">' + data[i].status +'</td>'
                         + '<td style="display: none" id="userId">' + data[i].user.id + '</td>'
-                        + '<td><img src="" class="rounded" alt=""></td>'
+                        + '<td><img src="/autoParkCarsImages/' + carPhoto + '" class="rounded" alt="" width="200px" height="100px"></td>'
                         + '<td></td><td><div class="row">'
                         + '<div class="col-sm-5">' + data[i].brand + " " + data[i].model + '</div>'
                         + '<div class="col-sm-3">' + data[i].price + " ₽" + '</div>'
@@ -53,8 +55,8 @@
                         + '<div class="col-sm-10"></div></div>'
                         + '<div class="row">'
                         + '<div class="col-sm-2">' + data[i].body + '</div>'
-                        + '<div class="col-sm-4"></div>'
-                        + '<div class="col-sm-4">' + btnChangeOrder + btnChangeStatus + '</div>'
+                        + '<div class="col-sm-3"></div>'
+                        + '<div class="col-sm-5">' + btnAddPhoto + btnChangeOrder + btnChangeStatus + '</div>'
                         + '<div class="col-sm-2">'
                         + '<h4 id="tag">'+ badge +'</h4></div></div></td></tr>');
                 }
@@ -77,6 +79,16 @@
                 result = "<button type=\"button\" "
                     + "class=\"btn btn-outline-primary btn-sm\" "
                     + "id=\"btn-change\">Change status</button>";
+            }
+            return result;
+        }
+
+        function getBtnAddPhoto(currentUserId, sellOrderUserId) {
+            var result = "";
+            if (currentUserId === sellOrderUserId) {
+                result = "<button type=\"button\" "
+                    + "class=\"btn btn-outline-info btn-sm\" "
+                    + "id=\"btn-photo\">Add photo</button>";
             }
             return result;
         }
@@ -104,6 +116,14 @@
                         function () {
                             displayAllSellOrders();
                         });
+            });
+        });
+
+        $(document).ready(function () {
+            $("#allSellOrders").on("click", "#btn-photo", function () {
+                var $row = $(this).closest("tr");
+                var $id = $row.find("td:nth-child(1)").text();
+                window.location.replace("<%=request.getContextPath()%>/uploadPage.do?orderId=" + $id);
             });
         });
 

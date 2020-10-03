@@ -1,6 +1,7 @@
 package ru.job4j.presentation;
 
 import ru.job4j.application.AutoPark;
+import ru.job4j.domain.CarPhoto;
 import ru.job4j.domain.SellOrder;
 import ru.job4j.domain.User;
 

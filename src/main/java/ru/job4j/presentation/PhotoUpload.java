@@ -21,6 +21,7 @@ import java.util.List;
 public class PhotoUpload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("orderId");
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletContext servletContext = this.getServletConfig().getServletContext();
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
@@ -28,27 +29,20 @@ public class PhotoUpload extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
             List<FileItem> items = upload.parseRequest(req);
-            File folder = new File("autoParkCarsImages");
+            File folder = new File("webapps\\autoParkContent\\img\\autoParkCarsImages");
             if (!folder.exists()) {
                 folder.mkdir();
             }
             for (FileItem item : items) {
                 if (!item.isFormField()) {
-                    String sellOrderId = req.getParameter("orderId");
-                    String photoName = req.getParameter("brand") + req.getParameter("model");
+                    int sellOrderId = Integer.parseInt(id);
                     String extension = item.getName().substring(item.getName().lastIndexOf("."));
-                    SellOrder sellOrder =
-                            AutoPark.instOf().findSellOrderById(Integer.parseInt(sellOrderId));
-                    if (sellOrder != null) {
-                        File file =
-                                new File(folder + File.separator + sellOrder.getBrand() + sellOrder.getModel());
-                        file.delete();
-                        photo.setName(sellOrderId + extension);
-                        AutoPark.instOf().saveCandidatePhoto(photo, sellOrderId);
-                    } else {
-                        savePhoto(sellOrderId, extension);
-                    }
-                    File file = new File(folder + File.separator + candidateId + extension);
+                    SellOrder sellOrder = AutoPark.instOf().findSellOrderById(sellOrderId);
+                    String photoName = sellOrderId + extension;
+                    CarPhoto photo = new CarPhoto(photoName, sellOrderId);
+                    sellOrder.setCarPhoto(AutoPark.instOf().createCarPhoto(photo).getName());
+                    AutoPark.instOf().updateSellOrder(sellOrder);
+                    File file = new File(folder + File.separator + photoName);
                     try (FileOutputStream out = new FileOutputStream(file)) {
                         out.write(item.getInputStream().readAllBytes());
                     }
@@ -57,16 +51,7 @@ public class PhotoUpload extends HttpServlet {
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        resp.sendRedirect(req.getContextPath() + "/candidates.do");
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 
-    private void savePhoto(String candidateId, String extension) {
-        CandidatePhoto photo = new CandidatePhoto(candidateId + extension);
-        int id = Integer.parseInt(candidateId);
-        photo.setCandidateId(id);
-        PsqlStore.instOf().saveCandidatePhoto(photo, candidateId);
-        Candidate candidate = PsqlStore.instOf().findCandidateById(id);
-        candidate.setPhotoId(id);
-        PsqlStore.instOf().saveCandidate(candidate);
-    }
 }

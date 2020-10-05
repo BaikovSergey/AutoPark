@@ -9,8 +9,5 @@
         <module name="AutoPark" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="AutoPark" target="9" />
-    </bytecodeTargetLevel>
   </component>
 </project>

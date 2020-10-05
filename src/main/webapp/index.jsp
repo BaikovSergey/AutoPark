@@ -39,8 +39,8 @@
                         + '<td style="display: none" id="orderId">' + data[i].id +'</td>'
                         + '<td style="display: none" id="status">' + data[i].status +'</td>'
                         + '<td style="display: none" id="userId">' + data[i].user.id + '</td>'
-                        + '<td><img src="<c:url value="/download.do?name="/>' + carPhoto +
-                        ' "class="rounded" width="205px" height="154px"/></td>'
+                        + '<td><img src="<c:url value="/download.do?name="/>' + carPhoto
+                        + ' "class="rounded" width="205px" height="154px"/></td>'
                         + '<td></td><td><div class="row">'
                         + '<div class="col-sm-5">' + data[i].brand + " " + data[i].model + '</div>'
                         + '<div class="col-sm-3">' + data[i].price + " ₽" + '</div>'

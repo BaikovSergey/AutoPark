@@ -29,7 +29,7 @@ public class PhotoUpload extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
             List<FileItem> items = upload.parseRequest(req);
-            File folder = new File("webapps\\autoParkContent\\img\\autoParkCarsImages");
+            File folder = new File("autoParkCarsImages");
             if (!folder.exists()) {
                 folder.mkdir();
             }

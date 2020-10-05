@@ -30,7 +30,7 @@
                     var badge = getBadge(data[i].status);
                     var currentUserId = "${user.id}";
                     var sellOrderUserId = data[i].user.id.toString();
-                    var carPhoto = data[i].carPhoto.toString();
+                    var carPhoto = data[i].carPhoto;
                     var btnChangeOrder = getBtnChangeOrder(currentUserId, sellOrderUserId)
                     var btnChangeStatus = getBtnStatus(currentUserId, sellOrderUserId);
                     var btnAddPhoto = getBtnAddPhoto(currentUserId, sellOrderUserId);
@@ -39,13 +39,14 @@
                         + '<td style="display: none" id="orderId">' + data[i].id +'</td>'
                         + '<td style="display: none" id="status">' + data[i].status +'</td>'
                         + '<td style="display: none" id="userId">' + data[i].user.id + '</td>'
-                        + '<td><img src="/autoParkCarsImages/' + carPhoto + '" class="rounded" alt="" width="200px" height="100px"></td>'
+                        + '<td><img src="<c:url value="/download.do?name="/>' + carPhoto +
+                        ' "class="rounded" width="205px" height="154px"/></td>'
                         + '<td></td><td><div class="row">'
                         + '<div class="col-sm-5">' + data[i].brand + " " + data[i].model + '</div>'
                         + '<div class="col-sm-3">' + data[i].price + " ₽" + '</div>'
                         + '<div class="col-sm-2">' + data[i].condition + " year" + '</div>'
                         + '<div class="col-sm-2">' + data[i].mileage + " km" + '</div>'
-                        + '</div><div class="row">'
+                        + '</div><br><div class="row">'
                         + '<div class="col-sm-1">' + data[i].engineVolume + '</div>'
                         + '<div class="col-sm-2">' + data[i].engine + '</div>'
                         + '<div class="col-sm-1">' + data[i].drive + '</div>'
@@ -53,7 +54,7 @@
                         + '<div class="row">'
                         + '<div class="col-sm-2">' + data[i].transmission + '</div>'
                         + '<div class="col-sm-10"></div></div>'
-                        + '<div class="row">'
+                        + '<br><div class="row">'
                         + '<div class="col-sm-2">' + data[i].body + '</div>'
                         + '<div class="col-sm-3"></div>'
                         + '<div class="col-sm-5">' + btnAddPhoto + btnChangeOrder + btnChangeStatus + '</div>'
@@ -170,9 +171,9 @@
         <thead class="thead-light">
         <tr>
             <th class="orderId" style="display: none" id="orderId">Id</th>
-            <th style="width: 25%">Photo</th>
-            <th style="width: 3%"></th>
-            <th style="width: 72%">Description</th>
+            <th style="width: 20%">Photo</th>
+            <th style="width: 1%"></th>
+            <th style="width: 79%">Description</th>
         </tr>
         </thead>
         <tbody>

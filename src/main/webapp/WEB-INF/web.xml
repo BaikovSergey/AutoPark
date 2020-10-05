@@ -105,6 +105,14 @@
         <url-pattern>/upload.do</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>DownloadPhoto</servlet-name>
+        <servlet-class>ru.job4j.presentation.PhotoDownload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DownloadPhoto</servlet-name>
+        <url-pattern>/download.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>UploadPage</servlet-name>
         <servlet-class>ru.job4j.presentation.UploadPage</servlet-class>
     </servlet>

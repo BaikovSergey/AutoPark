@@ -13,7 +13,7 @@ Web app AutoPark consists of:
   
  Main page is a table with all sales.
  
- ![alt text](https://github.com/BaikovSergey/AutoPark/blob/master/images/mainPage.png)
+ ![alt text](https://github.com/BaikovSergey/AutoPark/blob/master/images/main%20page.png)
  
  To see sell orders user need to login or registrate and login.
  

@@ -128,7 +128,6 @@
             });
         });
 
-
         $(document).ready(function () {
             $("#allSellOrders").on("click", "#btn-update", function () {
                 var $row = $(this).closest("tr");
@@ -147,12 +146,36 @@
             });
         });
 
+        function signInOut() {
+            var text = "Sign in";
+            var user = "${user.name}";
+            if (user !== "") {
+                text = "Sign out";
+            }
+            return text;
+        }
+
+        $(document).ready(function () {
+            $("#login").text(signInOut());
+        });
+
     </script>
 </head>
 <body>
-<div class="container text-right">
-        <a class="nav-link" href="<%=request.getContextPath()%>/login.do" id="login"> <c:out
-                value="${user.name}"/> | Sign in</a>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col"> </div>
+        <div class="col-sm-auto"></div>
+            <div>
+                <c:out value="${user.name}"/>
+            </div>
+        <div class="col-sm-auto">
+            <div>
+                <a class="nav-link"
+                   href="<%=request.getContextPath()%>/login.do" id="login"></a>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container">
     <a href="<%=request.getContextPath()%>/create.do?userId=${userId}"

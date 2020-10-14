@@ -24,4 +24,7 @@ public interface SellPlatform {
     User findUserById(Integer id);
     User findUserByEmail(String email);
     CarPhoto findCarPhotoById (Integer id);
+    Collection<SellOrder> findTodaySellOrders();
+    Collection<SellOrder> findSellOrdersWithPhoto();
+    Collection<SellOrder> findSellOrdersByBrand(String brand);
 }

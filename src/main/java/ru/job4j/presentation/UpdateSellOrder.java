@@ -13,7 +13,7 @@ public class UpdateSellOrder extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         AutoPark.instOf().updateSellOrder(formSellOrder(req));
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath());
     }
 
     private SellOrder formSellOrder(HttpServletRequest req) {

@@ -17,14 +17,14 @@ public class PostNewSellOrder extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("sellOrders", AutoPark.instOf().findAllSellOrders());
         req.setAttribute("carPhotos", AutoPark.instOf().findAllCarPhotos());
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         AutoPark.instOf().createSellOrder(formSellOrder(req));
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath());
     }
 
     private SellOrder formSellOrder(HttpServletRequest req) {

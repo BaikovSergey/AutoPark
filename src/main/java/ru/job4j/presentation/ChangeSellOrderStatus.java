@@ -15,6 +15,6 @@ public class ChangeSellOrderStatus extends HttpServlet {
         SellOrder sellOrder = AutoPark.instOf().findSellOrderById(orderId);
         sellOrder.setStatus(true);
         AutoPark.instOf().updateSellOrder(sellOrder);
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath());
     }
 }

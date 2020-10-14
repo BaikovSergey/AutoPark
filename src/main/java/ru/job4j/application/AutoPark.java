@@ -105,4 +105,19 @@ public class AutoPark implements SellPlatform {
     public User findUserByEmail(String email) {
         return PsqlStore.instOf().findUserByEmail(email, sf);
     }
+
+    @Override
+    public Collection<SellOrder> findTodaySellOrders() {
+        return PsqlStore.instOf().findTodaySellOrders(sf);
+    }
+
+    @Override
+    public Collection<SellOrder> findSellOrdersWithPhoto() {
+        return PsqlStore.instOf().findSellOrdersWithPhoto(sf);
+    }
+
+    @Override
+    public Collection<SellOrder> findSellOrdersByBrand(String brand) {
+        return PsqlStore.instOf().findSellOrdersByBrand(brand, sf);
+    }
 }

@@ -22,9 +22,9 @@
 
     <script>
 
-        function displayAllSellOrders() {
+        function displaySellOrders(path) {
             $("#allSellOrders tbody").empty();
-            $.getJSON('<%=request.getContextPath()%>/getAllOrders.do', function (data) {
+            $.getJSON(path, function (data) {
                 for (var i = 0; i < data.length; i++) {
 
                     var badge = getBadge(data[i].status);
@@ -105,8 +105,11 @@
         }
 
         $(document).ready(function () {
-            displayAllSellOrders();
+            var path = '<%=request.getContextPath()%>/getAllOrders.do';
+            displaySellOrders(path);
         });
+
+
 
         $(document).ready(function () {
             $("#allSellOrders").on("click", "#btn-change", function () {
@@ -146,6 +149,35 @@
             });
         });
 
+        $(document).ready(function () {
+           $("#filters").on("click", "#withPhoto", function () {
+               var path = '<%=request.getContextPath()%>/withPhoto.do';
+               displaySellOrders(path);
+           });
+        });
+
+        $(document).ready(function () {
+            $("#filters").on("click", "#showAll", function () {
+                var path = '<%=request.getContextPath()%>/getAllOrders.do';
+                displaySellOrders(path);
+            });
+        });
+
+        $(document).ready(function () {
+            $("#filters").on("click", "#todayOrders", function () {
+                var path = '<%=request.getContextPath()%>/todayOrders.do';
+                displaySellOrders(path);
+            });
+        });
+
+        $(document).ready(function () {
+            $("#filters").on("click", ".dropdown-item", function () {
+                var brand = $(this).text().trim();
+                var path = '<%=request.getContextPath()%>/findByBrand.do?brand=' + brand;
+                displaySellOrders(path);
+            });
+        });
+
         function signInOut() {
             var text = "Sign in";
             var user = "${user.name}";
@@ -163,46 +195,77 @@
 </head>
 <body>
 <div class="container">
-    <div class="row align-items-center">
-        <div class="col"> </div>
-        <div class="col-sm-auto"></div>
-            <div>
-                <c:out value="${user.name}"/>
+    <div class="card" style="width: 100%">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col"> </div>
+                    <div class="col-sm-auto"></div>
+                    <div>
+                        <c:out value="${user.name}"/>
+                    </div>
+                    <div class="col-sm-auto">
+                        <div>
+                            <a class="nav-link"
+                               href="<%=request.getContextPath()%>/login.do" id="login"></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        <div class="col-sm-auto">
-            <div>
-                <a class="nav-link"
-                   href="<%=request.getContextPath()%>/login.do" id="login"></a>
+            <div class="card-body">
+                <div class="container pt-2">
+                    <a href="<%=request.getContextPath()%>/create.do?userId=${userId}"
+                       class="btn btn-success btn-lg">Add sell order</a>
+                </div>
+                <div class="container pt-3">
+                    <div class="btn-group" id="filters">
+                        <button  type="button" class="btn btn-primary btn-sm" id="showAll">Show all
+                        </button>
+                        <button  type="button" class="btn btn-primary btn-sm" id="toggleList">Show all | hide
+                            soled
+                        </button>
+                        <button  type="button" class="btn btn-primary btn-sm"
+                                 id="todayOrders">Today orders
+                        </button>
+                        <button  type="button" class="btn btn-primary btn-sm" id="withPhoto">With
+                            photo
+                        </button>
+                            <div class="btn-group">
+                                <button  type="button" class="btn btn-primary dropdown-toggle"
+                                         data-toggle="dropdown" id="brand">Brand</button>
+                                <div class="dropdown-menu">
+                                    <button  type="button" class="dropdown-item"
+                                             id="BMW">BMW
+                                    </button>
+                                    <button  type="button" class="dropdown-item"
+                                             id="MINI">MINI
+                                    </button>
+                                    <button  type="button" class="dropdown-item"
+                                             id="Audi">Audi
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="container pt-1">
+                    <table class="table" id="allSellOrders" style="table-layout: fixed">
+                        <thead class="thead-light">
+                        <tr>
+                            <th class="orderId" style="display: none" id="orderId">Id</th>
+                            <th style="width: 20%">Photo</th>
+                            <th style="width: 1%"></th>
+                            <th style="width: 79%">Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        <div class="card-footer">
+
+        </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <a href="<%=request.getContextPath()%>/create.do?userId=${userId}"
-       class="btn btn-success btn-lg">Add sell order</a>
-</div>
-<div class="container pt-5">
-    <div>
-        <button  type="button" class="btn btn-primary btn-sm" id="toggleList">Show all | hide
-            soled
-        </button>
-    </div>
-</div>
-
-<div class="container">
-    <table class="table" id="allSellOrders" style="table-layout: fixed">
-        <thead class="thead-light">
-        <tr>
-            <th class="orderId" style="display: none" id="orderId">Id</th>
-            <th style="width: 20%">Photo</th>
-            <th style="width: 1%"></th>
-            <th style="width: 79%">Description</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
-</div>
 </body>
 </html>

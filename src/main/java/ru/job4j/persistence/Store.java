@@ -24,4 +24,7 @@ public interface Store {
     User findUserById(Integer id, SessionFactory sf);
     User findUserByEmail(String email, SessionFactory sf);
     CarPhoto findCarPhotoById (Integer id, SessionFactory sf);
+    Collection<SellOrder> findTodaySellOrders(SessionFactory sf);
+    Collection<SellOrder> findSellOrdersWithPhoto(SessionFactory sf);
+    Collection<SellOrder> findSellOrdersByBrand(String brand, SessionFactory sf);
 }

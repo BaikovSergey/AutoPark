@@ -5,6 +5,9 @@ import ru.job4j.application.AutoPark;
 import ru.job4j.domain.SellOrder;
 import ru.job4j.domain.User;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -173,6 +176,8 @@ public class PsqlStoreTest {
     }
 
     private SellOrder generateOrder() {
+        LocalDate now = LocalDate.now();
+        String date = now.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         return new SellOrder(
                 "new",
                 "BMW",
@@ -184,7 +189,8 @@ public class PsqlStoreTest {
                 1,
                 3.0d,
                 65000,
-                false
+                false,
+                date
         );
     }
 }

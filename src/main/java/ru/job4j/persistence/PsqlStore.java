@@ -8,6 +8,8 @@ import ru.job4j.domain.CarPhoto;
 import ru.job4j.domain.SellOrder;
 import ru.job4j.domain.User;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -116,6 +118,27 @@ public class PsqlStore implements Store {
     @Override
     public CarPhoto findCarPhotoById(Integer id, SessionFactory sf) {
         return this.transaction(session -> session.get(CarPhoto.class, id), sf);
+    }
+
+    @Override
+    public Collection<SellOrder> findTodaySellOrders(SessionFactory sf) {
+        LocalDate now = LocalDate.now();
+        String date = now.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        return this.transaction(session -> session.createQuery(
+                "from SellOrder s where s.date = :date").setParameter("date", date).list(), sf);
+    }
+
+    @Override
+    public Collection<SellOrder> findSellOrdersWithPhoto(SessionFactory sf) {
+        return this.transaction(session -> session.createQuery(
+                "from SellOrder s where s.carPhoto != null or s.carPhoto != '0'").list(), sf);
+    }
+
+    @Override
+    public Collection<SellOrder> findSellOrdersByBrand(String brand, SessionFactory sf) {
+        return this.transaction(session -> session.createQuery(
+                "from SellOrder s where s.brand = :brand")
+                .setParameter("brand", brand).list(), sf);
     }
 
     private <T> T transaction(final Function<Session, T> command, SessionFactory sf) {

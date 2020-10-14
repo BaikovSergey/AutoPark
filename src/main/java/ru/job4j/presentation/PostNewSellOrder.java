@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class PostNewSellOrder extends HttpServlet {
 
@@ -28,6 +30,8 @@ public class PostNewSellOrder extends HttpServlet {
     }
 
     private SellOrder formSellOrder(HttpServletRequest req) {
+        LocalDate now = LocalDate.now();
+        String date = now.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         SellOrder result = new SellOrder();
         int userId = Integer.parseInt(req.getParameter("userId"));
         User user = AutoPark.instOf().findUserById(userId);
@@ -42,6 +46,7 @@ public class PostNewSellOrder extends HttpServlet {
         result.setMileage(Integer.parseInt(req.getParameter("mileage")));
         result.setPrice(Integer.parseInt(req.getParameter("price")));
         result.setUser(user);
+        result.setDate(date);
         return result;
     }
 }

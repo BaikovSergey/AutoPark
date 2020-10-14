@@ -120,4 +120,28 @@
         <servlet-name>UploadPage</servlet-name>
         <url-pattern>/uploadPage.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderByBrand</servlet-name>
+        <servlet-class>ru.job4j.presentation.OrdersByBrand</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderByBrand</servlet-name>
+        <url-pattern>/findByBrand.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderWithPhoto</servlet-name>
+        <servlet-class>ru.job4j.presentation.OrdersWithPhoto</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderWithPhoto</servlet-name>
+        <url-pattern>/withPhoto.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>TodayOrders</servlet-name>
+        <servlet-class>ru.job4j.presentation.TodayOrders</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TodayOrders</servlet-name>
+        <url-pattern>/todayOrders.do</url-pattern>
+    </servlet-mapping>
 </web-app>

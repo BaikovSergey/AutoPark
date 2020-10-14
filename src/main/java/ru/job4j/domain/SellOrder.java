@@ -33,6 +33,8 @@ public class SellOrder {
     private boolean status;
     @Column(name = "car_photo_id")
     private String carPhoto;
+    @Column(name = "date")
+    private String date;
     @ManyToOne
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "USER_ID_FK"))
     private User user;
@@ -43,7 +45,7 @@ public class SellOrder {
 
     public SellOrder(String condition, String brand, String model, String body,
                      String transmission, String engine, String drive, Integer mileage,
-                     double engineVolume, Integer price, boolean status, User user) {
+                     double engineVolume, Integer price, boolean status, String date, User user) {
         this.condition = condition;
         this.brand = brand;
         this.model = model;
@@ -55,12 +57,13 @@ public class SellOrder {
         this.engineVolume = engineVolume;
         this.price = price;
         this.status = status;
+        this.date = date;
         this.user = user;
     }
 
     public SellOrder(String condition, String brand, String model, String body,
                      String transmission, String engine, String drive, Integer mileage,
-                     double engineVolume, Integer price, boolean status) {
+                     double engineVolume, Integer price, boolean status, String date) {
         this.condition = condition;
         this.brand = brand;
         this.model = model;
@@ -72,6 +75,7 @@ public class SellOrder {
         this.engineVolume = engineVolume;
         this.price = price;
         this.status = status;
+        this.date = date;
     }
 
     public int getId() {
@@ -190,6 +194,14 @@ public class SellOrder {
         this.carPhoto = carPhoto;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -212,13 +224,14 @@ public class SellOrder {
                 && Objects.equals(price, sellOrder.price)
                 && Objects.equals(status, sellOrder.status)
                 && Objects.equals(carPhoto, sellOrder.carPhoto)
+                && Objects.equals(date, sellOrder.date)
                 && Objects.equals(user, sellOrder.user);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, condition, brand, model, body, transmission, engine, drive,
-                mileage, engineVolume, price, status, carPhoto, user);
+                mileage, engineVolume, price, status, carPhoto, date, user);
     }
 
 }
